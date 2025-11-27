@@ -1,3 +1,5 @@
+package com.mycompany.cs5003cw1.supermarket.models;
+
 import javax.swing.JFrame;
 import javax.swing.JButton;
 

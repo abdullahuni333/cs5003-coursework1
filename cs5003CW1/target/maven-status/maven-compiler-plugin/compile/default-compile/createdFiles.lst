@@ -1,4 +1,7 @@
 com\mycompany\cs5003cw1\supermarket\models\Interface.class
+com\mycompany\cs5003cw1\supermarket\models\SupermarketGUI.class
 com\mycompany\cs5003cw1\supermarket\models\Product.class
 com\mycompany\cs5003cw1\supermarket\models\activityTracker.class
+com\mycompany\cs5003cw1\supermarket\models\SupermarketSystem.class
+Activity.class
 com\mycompany\cs5003cw1\supermarket\models\queue.class

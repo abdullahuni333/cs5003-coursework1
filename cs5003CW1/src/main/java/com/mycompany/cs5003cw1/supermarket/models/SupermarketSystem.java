@@ -1,3 +1,8 @@
+package com.mycompany.cs5003cw1.supermarket.models;
+
+
+import com.mycompany.cs5003cw1.supermarket.models.SupermarketGUI;
+
 
 /**
  * Write a description of class SupermarketSystem here.
