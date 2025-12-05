@@ -13,12 +13,14 @@ public class Product {
     public String productName;
     public String entryDate;
     public int quantity;
+    public queue queue;
     
     public Product(int ID, String aName, String aDate, int aQuantity){
         productID = ID;
         productName = aName;
         entryDate = aDate;
         quantity = aQuantity;    
+        queue = new queue();
     }
     
     public int getProductID() {
@@ -51,6 +53,9 @@ public class Product {
     
     public void setEntryDate (String aDate) {
         entryDate = aDate;
+    }
+    public void setqueue (String alist) {
+        entryDate = alist;
     }
     
 }

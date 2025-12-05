@@ -13,8 +13,9 @@ import java.util.Arrays;
 public class queue {
 
     activityTracker[] array = new activityTracker[4];
-    int head = 0;
-    int tail = 0;
+    public int productID;
+    int head = 3;
+    int tail = 3;
 
     public void queue() {
         this.array = new activityTracker[4];
@@ -31,54 +32,63 @@ public class queue {
         return this.array[0];
     }
 
-    //data is pushed onto the array 
     public void enqueue(activityTracker log) {
 
-        if (tail <= 4) {
-
+        System.out.println("tail "+tail + ":" + head+" head");
+            //replace 0 with null when using with objects
             if (array[tail] == null) {
                 this.array[tail] = log;
-                
-
-            } else if (array[tail] != null) {
-                for (int i = 0; i < array.length - 1; i++) {
-                    array[i] = array[i + 1];
-                    tail = i;
+                //this stops the tail index
+                if (tail == 0) {
+                    System.out.println("tail is 0");
+                } 
+                //increment the tail downwards 
+                else {
+                    tail--;
                 }
-                tail++;
-
-
             }
-
-            //this.array[head] = log;
-            System.out.println(tail);
         }
+
+    
+    public void dequeue() {
+ 
+        //goes down the list and assigns the current index with the index before it 
+        for (int index = array.length - 1; index >= 0; index--) {
+            if (index == 0) {
+                break;
+            }
+            array[index] = array[index - 1];
+
+        }
+        //increments the tail up and makes sure the tail isnt higher than the head 
+        tail++;
+        if (tail == 4) {
+            tail = 3;
+        }
+        System.out.println("tail "+tail + ":" + head+" head");
+        array[0] = null;
+
     }
 
-    public void dequeue() {
-
-        if (array[head] != null) {
-                for (int i = 3; i < array.length - 1; i--) {
-                    array[i] = array[i - 1];
-                    tail = i;
-                }}
-            }
-            //currently prints the entire array rather than an index of it 
     public void peek() {
 
-        System.out.println(array[0].getProductName());
-        System.out.println(array[1].getProductName());
+        System.out.println(array[3].getProductName());
 
     }
 
     public static void main(String[] args) {
         queue test = new queue();
-        activityTracker thing = new activityTracker(0, "test", "wednesday", 5);
-        activityTracker alternate = new activityTracker(0, "tet", "wednesday", 5);
+        activityTracker thing = new activityTracker(0, "1", "wednesday", 5);
+        activityTracker alternate = new activityTracker(0, "2", "wednesday", 5);
+        activityTracker thing1 = new activityTracker(0, "3", "wednesday", 5);
+        activityTracker alternate1 = new activityTracker(0, "4", "wednesday", 5);
+
         test.enqueue(thing);
         test.enqueue(alternate);
-        test.enqueue(thing);
-        //test.dequeue();
+        test.enqueue(thing1);
+        test.enqueue(alternate1);        
+        test.dequeue();
+               test.dequeue();
         test.peek();
 
     }
