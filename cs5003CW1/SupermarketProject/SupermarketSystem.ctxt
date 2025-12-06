@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=SupermarketSystem
+comment1.params=
+comment1.target=SupermarketSystem()
+comment2.params=
+comment2.target=java.util.ArrayList\ getProducts()
+comment3.params=name\ qty
+comment3.target=Product\ addProduct(java.lang.String,\ int)
+comment4.params=id
+comment4.target=boolean\ deleteProduct(int)
+comment5.params=args
+comment5.target=void\ main(java.lang.String[])
+numComments=6
