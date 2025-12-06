@@ -15,7 +15,10 @@ public class SupermarketSystem
 public static void main (String[] args) {
     SupermarketSystem system = new SupermarketSystem();
     new SupermarketGUI(system);
-    
+    Product test = new Product(1,"coo","ble",3);
+    activityTracker moretest = new activityTracker(1,"coo","ble",3);
+    test.queue.enqueue(moretest);
+    test.queue.peek();
     
 }
 }
