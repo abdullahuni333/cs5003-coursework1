@@ -50,5 +50,11 @@ public class Product {
         entryDate = aDate;
     }
     
-
+        @Override
+    public String toString() {
+        return "ID: " + productID +
+                " | Name: " + productName +
+                " | Qty: " + quantity +
+                " | Date: " + entryDate;
+    }
 }

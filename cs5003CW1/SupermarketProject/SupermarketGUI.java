@@ -168,25 +168,35 @@ saveButton.addActionListener(new ActionListener() {
 
    //delete button action
    private void deleteSelectedProduct() {
-       Product selected = list.getSelectedValue();
+      
+       //Ask for productID
+       String input = JOptionPane.showInputDialog(
+       frame,
+               "Enter Product ID to delete:"
+       );
        
-       if (selected == null) {
-           JOptionPane.showMessageDialog(frame, "Please select a product");
+       if (input == null) {
            return;
        }
        
-       int confirm = JOptionPane.showConfirmDialog(
-       frame,
-       "Delete product: " + selected.getProductName() + "?",
-       "Confirm",
-       JOptionPane.YES_NO_OPTION
-    );
-    
-    if (confirm == JOptionPane.YES_OPTION) {
-        system.deleteProduct(selected.getProductID());
-        myList.removeElement(selected);
-        JOptionPane.showMessageDialog(frame, "Product deleted.");
-     }
+       int id;
+       
+       try {
+           id = Integer.parseInt(input);
+       } catch (NumberFormatException e) {
+           JOptionPane.showMessageDialog(frame, "Invalid ID");
+           return;
+       }
+       
+       //Ask system to search/delete product
+       boolean deleted = system.deleteProduct(id);
+       
+       if (deleted) {
+           JOptionPane.showMessageDialog(frame, "Product successfully deleted.");
+           refreshProductList();
+       } else {
+           JOptionPane.showMessageDialog(frame, "Product not found.");
+       }
     }
    
     //Refresh list 

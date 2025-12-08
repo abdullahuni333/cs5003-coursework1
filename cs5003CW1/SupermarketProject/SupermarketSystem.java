@@ -59,6 +59,33 @@ public boolean deleteProduct(int id) {
     return false;
 }
 
+//Binary search - searches for product with productID
+public Product binarySearchProduct(int id) {
+    
+    int left = 0;
+    
+    int right = products.size() -1;
+    
+    while (left <= right) {
+        
+        int middle = (left + right) / 2;
+        int middleID = products.get(middle).getProductID();
+        
+        if (middleID == id) {
+            return products.get(middle); //product found
+            
+        }
+        else if (middleID < id) {
+            left = middle + 1; //searches right half
+        }
+        else {
+            right = middle - 1; //searches left half
+        }
+    }
+    
+    return null; // product hasnt been found
+}
+
 
 //Main method
 public static void main (String[] args) {
