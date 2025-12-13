@@ -54,6 +54,17 @@ public class Product {
     public void setEntryDate (String aDate) {
         entryDate = aDate;
     }
+            @Override
+    public String toString() {
+        return "ID: " + productID +
+                " | Name: " + productName +
+                " | Qty: " + quantity +
+                " | Date: " + entryDate;
+    }
+    
+    
+    
+    
     public void setqueue (String alist) {
         entryDate = alist;
     }
