@@ -10,6 +10,8 @@ package com.mycompany.cs5003cw1.supermarket.models;
  */
 public class activityTracker extends Product {
 
+    static boolean getQuantity;
+
 
     
     public activityTracker(int productID, String productName, String entryDate, int quantity){
@@ -18,6 +20,5 @@ public class activityTracker extends Product {
 
     
     }
-
 
 }

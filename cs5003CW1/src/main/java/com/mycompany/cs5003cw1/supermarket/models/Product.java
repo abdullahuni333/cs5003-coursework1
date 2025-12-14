@@ -54,6 +54,8 @@ public class Product {
     public void setEntryDate (String aDate) {
         entryDate = aDate;
     }
+    
+    
             @Override
     public String toString() {
         return "ID: " + productID +

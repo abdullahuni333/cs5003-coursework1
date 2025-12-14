@@ -16,6 +16,7 @@ public class queue {
     public int productID;
     int head = 3;
     int tail = 3;
+    
 
     public void queue() {
         this.array = new activityTracker[4];
@@ -75,21 +76,55 @@ public class queue {
         System.out.println(array[3].getProductName());
 
     }
+    
+
+    public static void queueSort(activityTracker queue[]) {
+        boolean sorted = false;
+        int increment = 0;
+        activityTracker currentQauntity;
+        while (sorted == false) {
+
+            for (int i = 0; i < queue.length - 1; i++) {
+                //stops any errors from encountering an empty slot 
+                if (queue[i] == null) {
+                    System.out.println("ignored");
+
+                }
+
+                if (queue[i].quantity > queue[i + 1].quantity) {
+                    //the current index is stored for later
+                    currentQauntity = queue[i];
+                    //the index is swapped out for the one after it 
+                    queue[i] = queue[i + 1];
+                    //and the one after it contains the stored index
+                    queue[i + 1] = currentQauntity;
+
+                    System.out.println(Arrays.toString(queue));
+
+                }
+            }
+            increment++;
+            if (increment == 2) {
+                sorted = true;
+            }
+
+        }
+
+    }
 
     public static void main(String[] args) {
         queue test = new queue();
-        activityTracker thing = new activityTracker(0, "1", "wednesday", 5);
-        activityTracker alternate = new activityTracker(0, "2", "wednesday", 5);
-        activityTracker thing1 = new activityTracker(0, "3", "wednesday", 5);
-        activityTracker alternate1 = new activityTracker(0, "4", "wednesday", 5);
+        activityTracker thing = new activityTracker(0, "1", "wednesday", 2);
+        activityTracker alternate = new activityTracker(0, "2", "wednesday", 3);
+        activityTracker thing1 = new activityTracker(0, "3", "wednesday", 30);
+        activityTracker alternate1 = new activityTracker(0, "4", "wednesday", 90);
 
         test.enqueue(thing);
         test.enqueue(alternate);
         test.enqueue(thing1);
         test.enqueue(alternate1);        
-        test.dequeue();
-               test.dequeue();
         test.peek();
-
+        queueSort(test.array);
+        
     }
 }
