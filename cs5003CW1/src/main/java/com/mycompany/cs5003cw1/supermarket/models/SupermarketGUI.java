@@ -62,6 +62,7 @@ public class SupermarketGUI {
     for (Product p : system.getProducts()) {
         myList.addElement(p);
     }
+
     
     //Positioning
     addProduct.setBounds(50, 50, 150, 30);
@@ -159,11 +160,12 @@ public class SupermarketGUI {
         
         //Button logic
         confirmButton.addActionListener(new ActionListener() {
+            
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    int id = Integer.parseInt(idField.getText());
-                } catch (NumberFormatException ex) {
+                
+                   int id = Integer.parseInt(idField.getText());
+                
                     
                     boolean deleted = system.deleteProductById(id);
                     
@@ -172,10 +174,10 @@ public class SupermarketGUI {
                         deleteFrame.dispose();
                     } else {
                         JOptionPane.showMessageDialog(deleteFrame, "Product not found");
-               
-                    }
                         JOptionPane.showMessageDialog(deleteFrame, "Please enter a valid ID.");
                     }
+                        
+                    
                 }
             });
         }

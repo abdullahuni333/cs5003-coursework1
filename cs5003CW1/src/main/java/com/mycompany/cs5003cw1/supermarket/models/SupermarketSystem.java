@@ -104,14 +104,14 @@ public class SupermarketSystem {
         p.setQuantity(p.getQuantity() + amount);
         
         //Create activity
-        Activity a = new Activity(
+        activityTracker a = new activityTracker(
         productId,
                 "Add to stock",
                 java.time.LocalDate.now().toString(),
                 amount
         );
         
-        p.getQueue().enqueue(a);
+        p.queue.enqueue(a);
         return true;
     }
     
@@ -125,14 +125,14 @@ public class SupermarketSystem {
         
         p.setQuantity(p.getQuantity() - amount);
         
-        Activity a = new Activity(
+        activityTracker a = new activityTracker(
         productId, 
         "Remove from stock",
         java.time.LocalDate.now().toString(),
         amount
       );
         
-        p.getQueue.enqueue(a);
+        p.queue.enqueue(a);
         return true;
     }
 
@@ -153,7 +153,7 @@ public class SupermarketSystem {
         fake.queue.enqueue(temporary2);
         //shows the current head of the queue 
         fake.queue.peek();
-        fake.queue.queueSort(fake.queue.array);
+        //fake.queue.queueSort(fake.queue.array);
     }
 
 }

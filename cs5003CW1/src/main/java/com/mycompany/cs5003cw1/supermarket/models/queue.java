@@ -74,6 +74,7 @@ public class queue {
     public void peek() {
 
         System.out.println(array[3].getProductName());
+        System.out.println(Arrays.toString(array));
 
     }
     
