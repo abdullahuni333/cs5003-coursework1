@@ -1,4 +1,4 @@
-
+package com.mycompany.cs5003cw1.supermarket.models;
 /**
  * Write a description of class Activity here.
  *

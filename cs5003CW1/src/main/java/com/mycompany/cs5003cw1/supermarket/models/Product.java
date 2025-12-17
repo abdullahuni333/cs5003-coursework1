@@ -6,7 +6,7 @@ package com.mycompany.cs5003cw1.supermarket.models;
 
 /**
  *
- * @author nadiaabdullahi
+ * @author nadiaabdullahi  
  */
 public class Product {
     public int productID;

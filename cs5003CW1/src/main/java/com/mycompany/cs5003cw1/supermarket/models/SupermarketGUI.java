@@ -24,6 +24,9 @@ public class SupermarketGUI {
     private JButton addProduct; 
     private JButton deleteProduct;
     private JButton listProduct;
+    private JButton removeFromStock;
+    private JButton addToStock;
+    private JButton viewActivities;
     
     //Components for pop-up window
     private JPanel panel;
@@ -49,6 +52,11 @@ public class SupermarketGUI {
     addProduct = new JButton("Add Product");
     deleteProduct = new JButton("Delete Product");
     listProduct = new JButton("List Products");
+    removeFromStock = new JButton("Remove From Stock");
+    addToStock = new JButton("Add To Stock");
+    viewActivities = new JButton("View Activities");
+    
+    setUpStockButtons();
     
     //Add existing products 
     for (Product p : system.getProducts()) {
@@ -59,6 +67,9 @@ public class SupermarketGUI {
     addProduct.setBounds(50, 50, 150, 30);
     deleteProduct.setBounds(50, 100, 150, 30);
     listProduct.setBounds(50, 150, 150, 30);
+    removeFromStock.setBounds(50, 150, 100, 30);
+    addToStock.setBounds(50, 100, 150, 30);
+    viewActivities.setBounds(50, 100, 150, 30);
     
     //Product list
     list.setBounds(50,220,300,150);
@@ -68,12 +79,33 @@ public class SupermarketGUI {
     frame.add(addProduct);
     frame.add(deleteProduct);
     frame.add(listProduct);
+    frame.add(removeFromStock);
+    frame.add(addToStock);
+    frame.add(viewActivities);
     
     setUpButtonListeners();
     
     frame.setVisible(true);
 }
-    
+    // actions for Stock buttons
+    private void setUpStockButtons() {
+        
+        addToStock.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                openStockWindow("AddToStock");
+            }
+        });
+        
+        removeFromStock.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                openStockWindow("RemoveFromStock");
+            }
+        });
+    }
+              
+                    
     // connect buttons to actions
     public void setUpButtonListeners() {
         //When 'Add Product' is clicked
@@ -88,7 +120,7 @@ public class SupermarketGUI {
         deleteProduct.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                deleteSelectedProduct();
+                openDeleteProductWindow();
             } 
         });
         
@@ -99,8 +131,110 @@ public class SupermarketGUI {
                 refreshProductList();
             }
         });
+        
+        addToStock.addActionListener(e -> openStockWindow("Add"));
+        removeFromStock.addActionListener(e -> openStockWindow("Remove"));
+        
     }
-
+    
+    //Open window for deleting product by ID
+    private void openDeleteProductWindow() {
+        JFrame deleteFrame = new JFrame("Delete Product");
+        deleteFrame.setSize(300, 200);
+        deleteFrame.setLayout(null);
+        
+        JLabel idLabel = new JLabel("Product ID");
+        JTextField idField = new JTextField();
+        JButton confirmButton = new JButton("Delete");
+        
+        idLabel.setBounds(30, 40, 100, 25);
+        idField.setBounds(120, 40, 100, 25);
+        confirmButton.setBounds(90, 90, 100, 30);
+        
+        deleteFrame.add(idLabel);
+        deleteFrame.add(idField);
+        deleteFrame.add(confirmButton);
+        
+        deleteFrame.setVisible(true);
+        
+        //Button logic
+        confirmButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int id = Integer.parseInt(idField.getText());
+                } catch (NumberFormatException ex) {
+                    
+                    boolean deleted = system.deleteProductById(id);
+                    
+                    if (deleted) {
+                        JOptionPane.showMessageDialog(deleteFrame, "Product deleted.");
+                        deleteFrame.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(deleteFrame, "Product not found");
+               
+                    }
+                        JOptionPane.showMessageDialog(deleteFrame, "Please enter a valid ID.");
+                    }
+                }
+            });
+        }
+     
+//Opens window to add stock for product
+    private void openStockWindow(String type) {
+        JFrame stockFrame = new JFrame(type);
+        stockFrame.setSize(300, 200);
+        stockFrame.setLayout(null);
+        
+        JLabel idLabel = new JLabel("Product ID");
+        JLabel qtyLabel = new JLabel("Quantity");
+        
+        JTextField idField = new JTextField();
+        JTextField qtyField = new JTextField();
+        
+        JButton confirmButton = new JButton(type);
+        
+        idField.setBounds(140, 30, 100, 25);
+        idLabel.setBounds(30, 30, 100, 25);
+        
+        qtyField.setBounds(140, 70, 100, 25);
+        qtyLabel.setBounds(30, 70, 100, 25);
+        
+        confirmButton.setBounds(90, 120, 120, 30);
+        
+        stockFrame.add(idField);
+        stockFrame.add(idLabel);
+        stockFrame.add(qtyField);
+        stockFrame.add(qtyLabel);
+        stockFrame.add(confirmButton);
+        
+        stockFrame.setVisible(true);
+        
+        confirmButton.addActionListener(e -> {
+            try {
+                int id = Integer.parseInt(idField.getText());
+                int qty = Integer.parseInt(qtyField.getText());
+                
+                boolean success;
+                
+                if (type.equals("Add")) {
+                    success = system.addToStock(id, qty);
+                } else {
+                    success = system.removeFromStock(id, qty);         
+                }
+                if (success) {
+                    JOptionPane.showMessageDialog(stockFrame, "Stock updated");
+                    stockFrame.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(stockFrame, "Operation failed");
+                }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(stockFrame, "Enter valid numbers");
+            }
+        }
+        
+        );
+    }
 
     
 //When user clicks "Add Product"
@@ -166,39 +300,6 @@ saveButton.addActionListener(new ActionListener() {
       }
      });
    }
-
-   //delete button action
-   private void deleteSelectedProduct() {
-      
-       //Ask for productID
-       String input = JOptionPane.showInputDialog(
-       frame,
-               "Enter Product ID to delete:"
-       );
-       
-       if (input == null) {
-           return;
-       }
-       
-       int id;
-       
-       try {
-           id = Integer.parseInt(input);
-       } catch (NumberFormatException e) {
-           JOptionPane.showMessageDialog(frame, "Invalid ID");
-           return;
-       }
-       
-       //Ask system to search/delete product
-       boolean deleted = system.deleteProduct(id);
-       
-       if (deleted) {
-           JOptionPane.showMessageDialog(frame, "Product successfully deleted.");
-           refreshProductList();
-       } else {
-           JOptionPane.showMessageDialog(frame, "Product not found.");
-       }
-    }
    
     //Refresh list 
     private void refreshProductList() {
@@ -207,8 +308,13 @@ saveButton.addActionListener(new ActionListener() {
             myList.addElement(p);
         }
     }
-   
 }
+        
+                
+        
+               
+   
+
    
     
     
