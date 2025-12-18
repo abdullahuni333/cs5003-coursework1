@@ -48,6 +48,11 @@ public class queue {
                     tail--;
                 }
             }
+            else{
+            dequeue();
+            enqueue(log);
+            }
+            
         }
 
     
@@ -66,16 +71,18 @@ public class queue {
         if (tail == 4) {
             tail = 3;
         }
-        System.out.println("tail "+tail + ":" + head+" head");
+        System.out.println("tail "+tail + ":" + head+" head oh also the dequeue function is working");
         array[0] = null;
 
     }
 
-    public void peek() {
+    public String peek() {
 
-        System.out.println(array[3].getProductName());
+        //System.out.println(array[3].getProductName());
+        
         System.out.println(Arrays.toString(array));
-
+        queueSort(array);
+        return Arrays.toString(array);
     }
     
 
@@ -100,7 +107,7 @@ public class queue {
                     //and the one after it contains the stored index
                     queue[i + 1] = currentQauntity;
 
-                    System.out.println(Arrays.toString(queue));
+                    //System.out.println(Arrays.toString(queue));
 
                 }
             }
@@ -118,12 +125,15 @@ public class queue {
         activityTracker thing = new activityTracker(0, "1", "wednesday", 2);
         activityTracker alternate = new activityTracker(0, "2", "wednesday", 3);
         activityTracker thing1 = new activityTracker(0, "3", "wednesday", 30);
+                activityTracker thing12 = new activityTracker(0, "3", "wedfafdafdaffafdasfasdfdasfdsfdafadfdnesday", 30);
         activityTracker alternate1 = new activityTracker(0, "4", "wednesday", 90);
 
         test.enqueue(thing);
         test.enqueue(alternate);
         test.enqueue(thing1);
-        test.enqueue(alternate1);        
+        test.enqueue(alternate1);       
+                test.enqueue(thing12);
+        test.enqueue(alternate1);   
         test.peek();
         queueSort(test.array);
         

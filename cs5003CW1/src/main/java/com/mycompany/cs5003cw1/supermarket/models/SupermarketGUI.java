@@ -65,15 +65,15 @@ public class SupermarketGUI {
 
     
     //Positioning
-    addProduct.setBounds(50, 50, 150, 30);
-    deleteProduct.setBounds(50, 100, 150, 30);
-    listProduct.setBounds(50, 150, 150, 30);
-    removeFromStock.setBounds(50, 150, 100, 30);
-    addToStock.setBounds(50, 100, 150, 30);
-    viewActivities.setBounds(50, 100, 150, 30);
+    addProduct.setBounds(30, 30, 180, 30);
+    deleteProduct.setBounds(30, 70, 180, 30);
+    listProduct.setBounds(30, 110, 180, 30);
+    removeFromStock.setBounds(30, 150, 180, 30);
+    addToStock.setBounds(30, 190, 180, 30);
+    viewActivities.setBounds(30, 230, 180, 30);
     
     //Product list
-    list.setBounds(50,220,300,150);
+    list.setBounds(50,320,300,180);
     frame.add(list);
     
     //Add to window
@@ -105,6 +105,8 @@ public class SupermarketGUI {
             }
         });
     }
+    
+
               
                     
     // connect buttons to actions
@@ -133,10 +135,18 @@ public class SupermarketGUI {
             }
         });
         
-        addToStock.addActionListener(e -> openStockWindow("Add"));
-        removeFromStock.addActionListener(e -> openStockWindow("Remove"));
+
+        viewActivities.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                viewActivities();
+            }
+        });
         
     }
+    
+    
+    
     
     //Open window for deleting product by ID
     private void openDeleteProductWindow() {
@@ -219,7 +229,7 @@ public class SupermarketGUI {
                 
                 boolean success;
                 
-                if (type.equals("Add")) {
+                if (type.equals("AddToStock")) {
                     success = system.addToStock(id, qty);
                 } else {
                     success = system.removeFromStock(id, qty);         
@@ -236,6 +246,61 @@ public class SupermarketGUI {
         }
         
         );
+    }
+    
+    
+    
+    //activity viewing code 
+     private void viewActivities() {
+        JFrame stockFrame = new JFrame("viewing");
+        
+        stockFrame.setSize(300, 200);
+        stockFrame.setLayout(null);
+        
+        JLabel idLabel = new JLabel("Product ID");
+        JTextField idField = new JTextField();
+
+        
+        JButton confirmButton = new JButton("view");
+        
+        idField.setBounds(140, 30, 100, 25);
+        idLabel.setBounds(30, 30, 100, 25);
+        
+
+        
+        
+        confirmButton.setBounds(90, 120, 120, 30);
+        
+        
+        
+        
+        
+        stockFrame.add(idField);
+        stockFrame.add(idLabel);
+        stockFrame.add(confirmButton);
+        
+        stockFrame.setVisible(true);
+        
+        confirmButton.addActionListener(e -> {
+            try {
+                int id = Integer.parseInt(idField.getText());
+                String result = system.findActivity(id);
+                JOptionPane.showMessageDialog(stockFrame,result);
+                
+                
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(stockFrame, "Enter valid numbers");
+            }
+        }
+        
+        );
+
+         
+         
+        
+
+        
+        
     }
 
     
@@ -318,6 +383,9 @@ saveButton.addActionListener(new ActionListener() {
    
 
    
+    
+    
+    
     
     
     
