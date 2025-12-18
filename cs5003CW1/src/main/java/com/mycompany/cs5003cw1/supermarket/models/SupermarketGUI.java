@@ -65,15 +65,15 @@ public class SupermarketGUI {
 
     
     //Positioning
-    addProduct.setBounds(50, 50, 150, 30);
-    deleteProduct.setBounds(50, 100, 150, 30);
-    listProduct.setBounds(50, 150, 150, 30);
-    removeFromStock.setBounds(50, 150, 100, 30);
-    addToStock.setBounds(50, 100, 150, 30);
-    viewActivities.setBounds(50, 100, 150, 30);
+    addProduct.setBounds(30, 30, 180, 30);
+    deleteProduct.setBounds(30, 70, 180, 30);
+    listProduct.setBounds(30, 110, 180, 30);
+    removeFromStock.setBounds(30, 150, 180, 30);
+    addToStock.setBounds(30, 190, 180, 30);
+    viewActivities.setBounds(30, 230, 180, 30);
     
     //Product list
-    list.setBounds(50,220,300,150);
+    list.setBounds(50,320,300,180);
     frame.add(list);
     
     //Add to window

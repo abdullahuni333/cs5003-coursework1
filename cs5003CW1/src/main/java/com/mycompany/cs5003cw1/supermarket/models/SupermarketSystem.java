@@ -121,7 +121,9 @@ public class SupermarketSystem {
         Product p = binarySearchProduct(productId);
         if (p == null) return false;
         
-        if (p.getQuantity() < amount);
+        if (p.getQuantity() < amount) {
+            return false;
+        }
         
         p.setQuantity(p.getQuantity() - amount);
         
@@ -141,19 +143,7 @@ public class SupermarketSystem {
         SupermarketSystem system = new SupermarketSystem();
         new SupermarketGUI(system);
         
-        // this the product 
-        Product fake = new Product(1, "Bread", "2025-11-27", 20);
-        //this is an activity 
-        activityTracker temporary = new activityTracker(1, "remove from stock", "2025-11-27", 20);
-        activityTracker temporary2 = new activityTracker(1, "remove from stock", "2025-11-27", 21);
-        //this stores the activity in the queue of only the "fake" object
-        fake.queue.enqueue(temporary);
-        fake.queue.enqueue(temporary);
-        fake.queue.enqueue(temporary);
-        fake.queue.enqueue(temporary2);
-        //shows the current head of the queue 
-        fake.queue.peek();
-        //fake.queue.queueSort(fake.queue.array);
+ 
     }
 
 }
