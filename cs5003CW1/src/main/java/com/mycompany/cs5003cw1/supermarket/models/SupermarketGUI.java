@@ -105,6 +105,8 @@ public class SupermarketGUI {
             }
         });
     }
+    
+
               
                     
     // connect buttons to actions
@@ -133,10 +135,18 @@ public class SupermarketGUI {
             }
         });
         
-        addToStock.addActionListener(e -> openStockWindow("Add"));
-        removeFromStock.addActionListener(e -> openStockWindow("Remove"));
+
+        viewActivities.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                viewActivities();
+            }
+        });
         
     }
+    
+    
+    
     
     //Open window for deleting product by ID
     private void openDeleteProductWindow() {
@@ -219,7 +229,7 @@ public class SupermarketGUI {
                 
                 boolean success;
                 
-                if (type.equals("Add")) {
+                if (type.equals("AddToStock")) {
                     success = system.addToStock(id, qty);
                 } else {
                     success = system.removeFromStock(id, qty);         
@@ -236,6 +246,61 @@ public class SupermarketGUI {
         }
         
         );
+    }
+    
+    
+    
+    //activity viewing code 
+     private void viewActivities() {
+        JFrame stockFrame = new JFrame("viewing");
+        
+        stockFrame.setSize(300, 200);
+        stockFrame.setLayout(null);
+        
+        JLabel idLabel = new JLabel("Product ID");
+        JTextField idField = new JTextField();
+
+        
+        JButton confirmButton = new JButton("view");
+        
+        idField.setBounds(140, 30, 100, 25);
+        idLabel.setBounds(30, 30, 100, 25);
+        
+
+        
+        
+        confirmButton.setBounds(90, 120, 120, 30);
+        
+        
+        
+        
+        
+        stockFrame.add(idField);
+        stockFrame.add(idLabel);
+        stockFrame.add(confirmButton);
+        
+        stockFrame.setVisible(true);
+        
+        confirmButton.addActionListener(e -> {
+            try {
+                int id = Integer.parseInt(idField.getText());
+                String result = system.findActivity(id);
+                JOptionPane.showMessageDialog(stockFrame,result);
+                
+                
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(stockFrame, "Enter valid numbers");
+            }
+        }
+        
+        );
+
+         
+         
+        
+
+        
+        
     }
 
     
@@ -318,6 +383,9 @@ saveButton.addActionListener(new ActionListener() {
    
 
    
+    
+    
+    
     
     
     

@@ -71,7 +71,7 @@ public class SupermarketSystem {
     }
 
 //Binary search - searches for product with productID
-    public Product binarySearchProduct(int id) {
+    public  Product binarySearchProduct(int id) {
 
         int left = 0;
 
@@ -137,7 +137,21 @@ public class SupermarketSystem {
         p.queue.enqueue(a);
         return true;
     }
+    
+    //written by aba2059
+    public String findActivity(int productId){
+    Product p = binarySearchProduct(productId);
 
+        return activityView(p);
+    }
+    //retrieves activities
+    public static String activityView(Product p){
+    
+        String result = p.queue.peek();
+        System.out.println(result);
+        return result;
+    }
+    
 //Main method
     public static void main(String[] args) {
         SupermarketSystem system = new SupermarketSystem();
