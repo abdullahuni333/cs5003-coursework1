@@ -37,8 +37,11 @@ public class queue {
 
         System.out.println("tail "+tail + ":" + head+" head");
             //replace 0 with null when using with objects
-            if (array[tail] == null) {
-                this.array[tail] = log;
+            
+            if (array[tail] != null){
+                dequeue();
+                tail--;
+            this.array[tail] = log;
                 //this stops the tail index
                 if (tail == 0) {
                     System.out.println("tail is 0");
@@ -48,9 +51,16 @@ public class queue {
                     tail--;
                 }
             }
-            else{
-            dequeue();
-            enqueue(log);
+            else if (array[tail] == null) {
+                this.array[tail] = log;
+                //this stops the tail index
+                if (tail == 0) {
+                    System.out.println("tail is 0");
+                } 
+                //increment the tail downwards 
+                else {
+                    tail--;
+                }
             }
             
         }
