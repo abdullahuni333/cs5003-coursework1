@@ -62,6 +62,18 @@ public class SupermarketSystem {
     public boolean deleteProductById(int id) {
         Product p = binarySearchProduct(id);
         
+        // code for reorganising the list 
+        for (int i = products.size()-1; i >-1;  i--){
+            
+            int currentProductID = products.get(i).productID;
+            
+            products.get(i).productID = currentProductID -1;
+            //loop ends when everything higher than the deleted product is altered 
+            if(products.get(i) == p){
+                break;
+                
+            }
+        } 
         if (p != null) {
             products.remove(p);
             return true;
