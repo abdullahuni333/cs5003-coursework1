@@ -3,10 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.cs5003cw1.supermarket.models;
-
 /**
  *
- * @author nadiaabdullahi  
+ * @author (nma0092)
  */
 public class Product {
     public int productID;
@@ -15,6 +14,7 @@ public class Product {
     public int quantity;
     public queue queue;
     
+    //Atributes
     public Product(int ID, String aName, String aDate, int aQuantity){
         productID = ID;
         productName = aName;
@@ -23,6 +23,7 @@ public class Product {
         queue = new queue();
     }
     
+    //Allows GUI and system logic to retrieve and update product details
     public int getProductID() {
         return productID;
     }
@@ -55,7 +56,7 @@ public class Product {
         entryDate = aDate;
     }
     
-    
+    //defines how products are displayed as text in JList
             @Override
     public String toString() {
         return "ID: " + productID +

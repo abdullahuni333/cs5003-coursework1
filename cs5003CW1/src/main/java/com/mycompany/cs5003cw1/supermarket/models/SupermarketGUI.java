@@ -1,4 +1,8 @@
 package com.mycompany.cs5003cw1.supermarket.models;
+/**
+ *
+ * @author (nma0092)
+ */
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
